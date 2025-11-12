@@ -5,7 +5,7 @@
 }
 
 .body{
-    background: url("../snake_image.jpg");
+    background: url("snake_image.jpg");
     background-repeat: no-repeat;
     background-image: fixed;
     min-height: 100vh;
@@ -63,4 +63,5 @@
     border:.25vmin solid black;
     box-shadow: 5px 5px 10px 5px black
 }
+
 
