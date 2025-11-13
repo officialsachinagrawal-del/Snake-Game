@@ -6,7 +6,7 @@ const gameOverSound= new Audio("game_over_music.mp3");
 const moveSound = new Audio("move.mp3");
 let musicSound = new Audio("background_music.mp3");
 let lastPaintTime = 0;
-let speed = 8;
+let speed = 5;
 let snakeArr = [// here only single array element
     
         {x:13, y:15} // its coordinate are as head of snake
@@ -18,7 +18,7 @@ let gameOver = false // added : prevent repeated game-over actions
 
 
 //game function
-function main(ctime){ //kis tiem pe program chalega
+function main(ctime){ //!kis tiem pe program chalega
 
     // console.log(ctime)// to get what is the fps now
 
@@ -34,6 +34,7 @@ function main(ctime){ //kis tiem pe program chalega
     
 }
 const board = document.getElementById('board');
+
 let ScoreBox = document.getElementById("ScoreBox");
 let highscoreBox = document.getElementById("HighScoreBox")
 
@@ -47,7 +48,7 @@ function isCollide(snake){
        }
     }
 
-    // if it bump to waal  (agr diwar se takraata h to)
+    //? if it bump to waal  (agr diwar se takraata h to)
     if(snake[0].x >= 18 || snake[0].x<=0 || snake[0].y >=18 || snake[0].y <=0){
       
         return true;
@@ -62,7 +63,7 @@ function isCollide(snake){
 }
 function gameEngine(){
 
-    // part1 := update snake body part location as it as array 
+    //! part1 := update snake body part location as it as array 
     
     // agr collide ho jaata h to
     if(isCollide(snakeArr)){
@@ -74,7 +75,7 @@ function gameEngine(){
             inputDir = {x:0, y:0};
             alert("Game Over: Press any key to resart");
 
-            //reset game state 
+            //?reset game state 
             moveSound.play();
             snakeArr = [{x:13, y:15}];
             food = {x:4, y:6};
@@ -87,7 +88,7 @@ function gameEngine(){
         
 
     }
-    // if you have eaten the food , increament in the score and regenerate the food 
+    // ?if you have eaten the food , increament in the score and regenerate the food 
 
     // snakeArr[0] => head of snake 
     if(snakeArr[0].x === food.x  && snakeArr[0].y === food.y){ // head or food ke coordinate matching condition
@@ -114,12 +115,12 @@ function gameEngine(){
         snakeArr[i+1] = {...snakeArr[i]} // desturcturing 
         
     }
-    snakeArr[0].x += inputDir.x;  // changing head x coordinate 
+    snakeArr[0].x += inputDir.x;  //? changing head x coordinate 
     snakeArr[0].y += inputDir.y;  // changing head y coordinate
     
 
 
-    // part2 := display snake and food( jo khana jaaega)
+    //! part2 := display snake and food( jo khana jaaega)
     board.innerHTML = "" // starting me board khaali hona chahie
   
     // display snake 
@@ -141,7 +142,7 @@ function gameEngine(){
 
     });
 
-       //disply food
+       //!disply food
 
         let foodElement = document.createElement("div");
         foodElement.style.gridRowStart = food.y; // gridRoWstart => jo postion daal rhe h us row me aaa jaaege
@@ -170,6 +171,54 @@ else{
 }
 window.requestAnimationFrame(main);
 
+// 🟩 Touch controls for mobile
+let startX, startY, endX, endY;
+
+board.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+
+board.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    endY = e.changedTouches[0].clientY;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+
+    // Prevent tiny accidental touches
+    if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) return;
+
+    // Determine direction (horizontal vs vertical swipe)
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 0 && inputDir.x !== -1) {
+            inputDir = { x: 1, y: 0 }; // right
+        } else if (diffX < 0 && inputDir.x !== 1) {
+            inputDir = { x: -1, y: 0 }; // left
+        }
+    } else {
+        // Vertical swipe
+        if (diffY > 0 && inputDir.y !== -1) {
+            inputDir = { x: 0, y: 1 }; // down
+        } else if (diffY < 0 && inputDir.y !== 1) {
+            inputDir = { x: 0, y: -1 }; // up
+        }
+    }
+
+    // Play move sound & start music
+    moveSound.play();
+    musicSound.play();
+}
+
+
+
+
+
+
 window.addEventListener('keydown',e =>{
     if(gameOver){
         gameOver = false;
@@ -182,7 +231,7 @@ window.addEventListener('keydown',e =>{
     musicSound.play();
     moveSound.play();
 
-    switch (e.key) { // ye bataege konsi key press kri h uske hissab se action peform hoga
+    switch (e.key) { //! ye bataege konsi key press kri h uske hissab se action peform hoga
       
         case "ArrowUp":
           console.log("Up key pressed");
