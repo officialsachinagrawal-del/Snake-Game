@@ -6,7 +6,7 @@ const gameOverSound= new Audio("game_over_music.mp3");
 const moveSound = new Audio("move.mp3");
 let musicSound = new Audio("background_music.mp3");
 let lastPaintTime = 0;
-let speed = 5;
+let speed = 8;
 let snakeArr = [// here only single array element
     
         {x:13, y:15} // its coordinate are as head of snake
@@ -61,6 +61,14 @@ function isCollide(snake){
 
  
 }
+//! start button
+const startBtn = document.getElementById('start-btn');
+startBtn.addEventListener('click', () => {
+  musicSound.play();
+  window.requestAnimationFrame(main);
+  startBtn.style.display = 'none';
+});
+
 function gameEngine(){
 
     //! part1 := update snake body part location as it as array 
@@ -73,16 +81,9 @@ function gameEngine(){
             gameOverSound.play();
             moveSound.pause();
             inputDir = {x:0, y:0};
-            alert("Game Over: Press any key to resart");
-
-            //?reset game state 
-            moveSound.play();
-            snakeArr = [{x:13, y:15}];
-            food = {x:4, y:6};
-            score = 0;
-            ScoreBox.innerHTML = "Score " + score;
-
-            gameOver = false;
+            
+            const gameOverScreen = document.querySelector('.game-over');
+            gameOverScreen.classList.add('show');
         }
         return ;
         
