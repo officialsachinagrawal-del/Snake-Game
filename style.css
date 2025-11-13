@@ -1,108 +1,109 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-}
-html,body{
-    overflow: hidden;
-    touch-action: none;
-    height: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.body{
-    background: url("../snake_image.jpg");
-    background-repeat: no-repeat;
-    background-image: fixed;
-    min-height: 100vh;
+html, body {
+  overflow: hidden;
+  touch-action: none;
+  height: 100%;
+}
+
+body {
+  background: url("../snake_image.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Snake board */
+#board {
+  background: linear-gradient(rgba(176, 124, 40, 0.522), rgb(193, 204, 132));
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(18, 1fr);
+  border: 2px solid black;
+  border-radius: 20px;
+  box-shadow: 5px 5px 9px 5px rgb(77, 129, 77);
+}
+
+/* Score boxes */
+#ScoreBox {
+  position: absolute;
+  top: 9px;
+  right: 200px;
+  font-size: 39px;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+
+#HighScoreBox {
+  position: absolute;
+  right: 120px;
+  top: 250px;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+
+/* Snake parts */
+.head {
+  background: linear-gradient(red, yellow);
+  border: 2px solid purple;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px red;
+}
+
+.snake {
+  background-color: purple;
+  border-radius: 12px;
+  border: .25vmin solid rgb(192, 21, 81);
+  box-shadow: 5px 5px 10px black;
+}
+
+.food {
+  background: linear-gradient(red, purple);
+  border-radius: 12px;
+  border: .25vmin solid black;
+  box-shadow: 5px 5px 10px 5px black;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  #board {
+    height: 90vmin;
+    width: 90vmin;
+  }
+}
+
+/* Mobile */
+@media (max-width: 420px) {
+  #board {
+    height: 95vmin;
+    width: 95vmin;
+  }
+
+  #ScoreBox, #HighScoreBox {
+    position: relative;
+    right: 0;
+    top: 0;
+    font-size: 22px;
+  }
+
+  .score-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 
-
+  body {
+    flex-direction: column;
+  }
 }
-#board{
-    background: linear-gradient(rgba(176, 124, 40, 0.522),rgb(193, 204, 132));
-    /* height: 90vmin;
-    width: 90vmin; */
-    height: 100vh;;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: repeat(18,1fr);
-    grid-template-rows:  repeat(18,1fr);
-    border: 2px solid black;
-    border-radius: 20px;
-    box-shadow: 5px 5px 9px 5px rgb(77, 129, 77);
-    
-}
-#ScoreBox{
-    position: absolute;
-    top:9px;
-    right:200px;
-    font-size: 39px;
-    font-weight:  bold;
-    text-decoration-line: underline;
-}
-#HighScoreBox{
-    position:absolute;
-    right:120px;
-    top:250px;
-    font-size: 40px;
-    font-weight: bold;
-    text-decoration-line: underline;
-}
-.head{
-    background:linear-gradient(red,yellow);
-    border: 2px solid purple;
-    border-radius: 8px;
-    box-shadow: 5px 5px 10px red
-}
-/* snake body */
-.snake{
-    background-color: purple;  
-    border-radius: 12px;
-    border:.25vmin solid rgb(192, 21, 81);
-    box-shadow: 5px 5px 10px black
-
-}
-.food{
-    background: linear-gradient(red,purple);
-    border-radius: 12px;
-    border:.25vmin solid black;
-    box-shadow: 5px 5px 10px 5px black
-}
-/*?for tablet and smallere devvices*/
-@media (max-width:1024px){
-    #board{
-        height: 90vmin;
-        width: 90vmin
-    }} 
-/*for mobile*/
-@media (max-width:400px){
-    #board{
-        height: 95vmin;
-        width: 95vmin
-    }
-    #ScoreBox, #HighScoreBox{
-        position:relative;
-
-        right:0;
-        top:0;
-    }
-    .score-container{
-        display:flex;
-       
-        justify-content: space-between;
-        justify-content: center;
-        gap:10px;
-        /* margin-bottom: 10px; */
-    }
-    .body{
-        display:flex;
-        flex-direction: column;
-    }
-}
-
-
-
-
-
