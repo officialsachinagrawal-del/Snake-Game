@@ -72,7 +72,7 @@
         width: 90vmin
     }} 
 /*for mobile*/
-@media (max-width:600px){
+@media (max-width:400px){
     #board{
         height: 95vmin;
         width: 95vmin
@@ -89,7 +89,7 @@
         justify-content: space-between;
         justify-content: center;
         gap:10px;
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
     }
     .body{
         display:flex;
