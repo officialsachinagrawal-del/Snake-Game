@@ -6,7 +6,7 @@ const gameOverSound= new Audio("game_over_music.mp3");
 const moveSound = new Audio("move.mp3");
 let musicSound = new Audio("background_music.mp3");
 let lastPaintTime = 0;
-let speed = 8;
+let speed = 6;
 let snakeArr = [// here only single array element
     
         {x:13, y:15} // its coordinate are as head of snake
@@ -265,3 +265,4 @@ window.addEventListener('keydown',e =>{
          break;
     }
 })
+
